@@ -39,6 +39,8 @@ public class User implements UserDetails{
     @Column(columnDefinition = "uuid")
     private UUID id;
 
+
+    private String username;
     private String email;
     private String password;
     private String name;

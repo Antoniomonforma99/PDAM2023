@@ -28,6 +28,7 @@ public class UserService {
     public User createUser(CreateUserRequestDTO createUserRequestDTO, Set<Roles> roles) {
         User user = User.builder()
                 .name(createUserRequestDTO.getName())
+                .username(createUserRequestDTO.getUsername())
                 .email(createUserRequestDTO.getEmail())
                 .password(passwordEncoder.encode(createUserRequestDTO.getPassword()))
                 .tlf(createUserRequestDTO.getTlf())
@@ -61,8 +62,8 @@ public class UserService {
                 }).or(() -> Optional.empty());
     }
 
-    public Optional<User> findByEmail(String email) {
-        return repository.findFirstByEmail(email);
+    public Optional<User> findByUsername(String username) {
+        return repository.findFirstByUsername(username);
     }
 
     public User editPassword(User user, ChangePasswordRequestDTO changePasswordRequestDTO){

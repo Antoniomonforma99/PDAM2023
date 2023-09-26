@@ -19,6 +19,8 @@ import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +30,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import java.time.LocalDateTime;
 
@@ -47,10 +50,13 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /*
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring().requestMatchers("/h2-console/**", "/auth/register", "/auth/login"));
     }
+
+     */
 
 
     @Bean
@@ -65,21 +71,6 @@ public class SecurityConfig {
         return authenticationManager;
     }
 
-
-
-    /*
-    @Bean
-    public void authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-
-        AuthenticationManager authenticationManager =
-                authenticationManagerBuilder.authenticationProvider(authenticationProvider())
-                        .build();
-
-    }
-
-     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -92,28 +83,46 @@ public class SecurityConfig {
 
     }
 
-    @Bean
-    public SecurityFilterChain h2ConsoleSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        return http
-                .authorizeHttpRequests(auth -> {
-                    auth
-                            .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll();
-                })
-                .csrf(csrf -> {
-                    csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"));
-                })
-                .headers(headers -> {
-                    headers.disable();
-                })
-                .build();
+    private static final String API_URL_PATTERN = "";
+
+    @Bean
+    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http,
+                                                      HandlerMappingIntrospector introspector) throws Exception {
+        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+
+        http.csrf(csrfConfigurer ->
+                csrfConfigurer.ignoringRequestMatchers(mvcMatcherBuilder.pattern(API_URL_PATTERN),
+                        PathRequest.toH2Console()));
+
+        http.headers(headersConfigurer ->
+                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+
+        http.authorizeHttpRequests(auth ->
+                auth
+                        .requestMatchers(mvcMatcherBuilder.pattern(API_URL_PATTERN)).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/me/**")).authenticated()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/user/**")).authenticated()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/auth/register")).authenticated()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/auth/register/admin")).hasRole("ADMIN")
+                        //would be applied for H2 path anyway
+                        .requestMatchers(PathRequest.toH2Console()).authenticated()
+                        .anyRequest().authenticated()
+        );
+
+        http.formLogin(Customizer.withDefaults());
+        http.httpBasic(Customizer.withDefaults());
+
+        return http.build();
     }
 
+
+    /*
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling((exception)->
                         exception.authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                 .accessDeniedPage("/error/access-denied")
@@ -137,38 +146,8 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /*
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http
-                .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
-                .exceptionHandling((exception)->
-                        exception.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                .accessDeniedHandler(jwtAccessDeniedHandler))
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/auth/register/admin")).hasRole("ADMIN")
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/me/**")).authenticated()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/user/**")).authenticated()
-                        .anyRequest().permitAll())
-                .build();
-
-
-
-
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.headers((headers) ->
-                headers
-                        .frameOptions((frameOptions) -> frameOptions.disable())
-        );
-
-        return http.getOrBuild();
-    }
-
      */
+
+
 
 }
