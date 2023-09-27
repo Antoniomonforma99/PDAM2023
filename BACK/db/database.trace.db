@@ -1,0 +1,9 @@
+2023-09-27 23:05:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users [42104-214]
+2023-09-27 23:08:21 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_ENTITY" not found (this database is empty); SQL statement:
+select * from user_entity [42104-214]
+2023-09-27 23:08:21 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_ENTITY" not found (this database is empty); SQL statement:
+select * from user_entity [42104-214]
