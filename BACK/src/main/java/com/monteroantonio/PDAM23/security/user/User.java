@@ -2,6 +2,7 @@ package com.monteroantonio.PDAM23.security.user;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,7 +43,8 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-
+    @NaturalId
+    @Column(unique = true, updatable = false)
     private String username;
     private String email;
     private String password;

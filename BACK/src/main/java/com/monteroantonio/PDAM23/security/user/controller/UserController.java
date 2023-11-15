@@ -26,10 +26,8 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService service;
-
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
-
     private final RefreshTokenService refreshTokenService;
 
 

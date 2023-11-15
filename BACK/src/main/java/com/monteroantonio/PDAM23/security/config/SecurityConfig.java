@@ -63,33 +63,31 @@ public class SecurityConfig {
 
         http
                 .cors(Customizer.withDefaults())
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE,"/restaurante/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers(HttpMethod.POST,"/restaurante/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers(HttpMethod.PUT,"/restaurante/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers(HttpMethod.POST,"/venta/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers("/venta/").hasAnyRole("ADMIN","OWNER")
-                .antMatchers("/restaurante/managed").hasAnyRole("ADMIN","OWNER")
-                .antMatchers("/plato/rate/**").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/plato/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers(HttpMethod.POST,"/plato/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers(HttpMethod.PUT,"/plato/**").hasAnyRole("ADMIN","OWNER")
-                .antMatchers("/auth/register/admin").hasRole("ADMIN")
-                .antMatchers("/me/**").authenticated()
-                .antMatchers("/user/**").authenticated()
-                .anyRequest().permitAll();
+                .csrf(csrf -> csrf.disable())
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler))
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeRequests(requests -> requests
+                        .antMatchers(HttpMethod.DELETE, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers(HttpMethod.POST, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers(HttpMethod.PUT, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers(HttpMethod.POST, "/venta/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers("/venta/").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers("/restaurante/managed").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers("/plato/rate/**").authenticated()
+                        .antMatchers(HttpMethod.DELETE, "/plato/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers(HttpMethod.POST, "/plato/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers(HttpMethod.PUT, "/plato/**").hasAnyRole("ADMIN", "OWNER")
+                        .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                        .antMatchers("/me/**").authenticated()
+                        .antMatchers("/user/**").authenticated()
+                        .anyRequest().permitAll());
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.headers().frameOptions().disable();
+        http.headers(headers -> headers.frameOptions().disable());
 
         return http.build();
     }
