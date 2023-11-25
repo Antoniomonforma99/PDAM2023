@@ -70,17 +70,7 @@ public class SecurityConfig {
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(requests -> requests
-                        .antMatchers(HttpMethod.DELETE, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers(HttpMethod.POST, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers(HttpMethod.PUT, "/restaurante/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers(HttpMethod.POST, "/venta/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers("/venta/").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers("/restaurante/managed").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers("/plato/rate/**").authenticated()
-                        .antMatchers(HttpMethod.DELETE, "/plato/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers(HttpMethod.POST, "/plato/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers(HttpMethod.PUT, "/plato/**").hasAnyRole("ADMIN", "OWNER")
-                        .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                        //.antMatchers("/auth/register/admin").hasRole("ADMIN")
                         .antMatchers("/me/**").authenticated()
                         .antMatchers("/user/**").authenticated()
                         .anyRequest().permitAll());

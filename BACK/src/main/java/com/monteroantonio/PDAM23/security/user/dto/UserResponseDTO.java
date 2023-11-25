@@ -25,7 +25,7 @@ public class UserResponseDTO {
 
     protected Set<Roles> roles;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")    
     protected LocalDateTime createdAt;
 
     public static UserResponseDTO fromUser(User user) {

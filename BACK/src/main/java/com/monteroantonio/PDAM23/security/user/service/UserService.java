@@ -65,12 +65,13 @@ public class UserService {
         return repository.findFirstByUsername(username);
     }
 
-    public User editPassword(User user, ChangePasswordRequestDTO changePasswordRequestDTO){
-        if (!user.getPassword().matches(changePasswordRequestDTO.getOldPassword()))
+    public User editPassword(User user, ChangePasswordRequestDTO changePasswordRequest) {
+        String pw = user.getPassword();
+        if(!passwordMatch(user, changePasswordRequest.getOldPassword()))
             throw new InvalidPasswordException();
         return repository.findById(user.getId())
                 .map(u -> {
-                    u.setPassword(passwordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
+                    u.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
                     return repository.save(u);
                 }).orElseThrow(() -> new EntityNotFoundException());
     }
@@ -78,6 +79,10 @@ public class UserService {
     @Transactional
     public void delete(User user) {
         repository.deleteById(user.getId());
+    }
+
+    public boolean passwordMatch(User user, String clearPassword) {
+        return passwordEncoder.matches(clearPassword, user.getPassword());
     }
 
 
