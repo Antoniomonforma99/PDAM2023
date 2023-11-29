@@ -1273,3 +1273,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Monty/D
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 136 more
+2023-11-30 00:06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM MENU MENU_PRODUCTOS [*]PRODUCTO"
+Syntax error in SQL statement "SELECT * FROM MENU MENU_PRODUCTOS [*]PRODUCTO"; SQL statement:
+SELECT * FROM MENU MENU_PRODUCTOS PRODUCTO [42000-214]
