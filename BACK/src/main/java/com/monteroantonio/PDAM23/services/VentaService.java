@@ -1,7 +1,7 @@
 package com.monteroantonio.PDAM23.services;
 
-import com.monteroantonio.PDAM23.model.Categoria;
-import com.monteroantonio.PDAM23.repository.CategoriaRepository;
+import com.monteroantonio.PDAM23.model.Venta;
+import com.monteroantonio.PDAM23.repository.VentaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,12 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriaService {
+public class VentaService {
 
-    private final CategoriaRepository repository;
+    private final VentaRepository repository;
+    private final ProductoService productoService;
 
-    public Categoria findById(UUID id) {
+    public Venta findDetails(UUID id) {
         return repository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-
-    public Categoria add (Categoria c) {
-        return repository.save(c);
     }
 }

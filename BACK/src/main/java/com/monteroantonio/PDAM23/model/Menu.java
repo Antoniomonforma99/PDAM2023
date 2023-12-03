@@ -33,55 +33,19 @@ public class Menu {
 
     private String nombre;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "menu_productos",
-            joinColumns = @JoinColumn(name = "menu_id", foreignKey = @ForeignKey(name = "FK_LISTADO_MENU")),
-            inverseJoinColumns = @JoinColumn(name = "producto_id", foreignKey = @ForeignKey(name = "FK_LISTADO_PRODUCTOS"))
-    )
+    @ManyToMany(mappedBy = "menus", fetch = FetchType.EAGER)
     @Builder.Default
     private List<Producto> productos = new ArrayList<>();
-
-    @ManyToOne
-    private Restaurante restaurante;
-
-
-    //Metodos helpers
-
-    public void addProducto(Producto p) {
-        if (this.getProductos() == null)
-            this.setProductos(new ArrayList<>());
-        this.getProductos().add(p);
-
-        if (p.getMenus() == null)
-            p.setMenus(new ArrayList<>());
-        p.getMenus().add(this);
-    }
-
-    public void removeProducto(Producto p) {
-        p.getMenus().remove(this);
-        this.getProductos().remove(p);
-    }
-
-    public void addRestaurante(Restaurante res) {
-        this.restaurante = res;
-        res.getMenus().add(this);
-    }
-
-    public void removeRestaurante(Restaurante res) {
-        res.getMenus().remove(this);
-        this.restaurante = null;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Menu menu)) return false;
-        return Objects.equals(id, menu.id) && Objects.equals(nombre, menu.nombre) && Objects.equals(productos, menu.productos) && Objects.equals(restaurante, menu.restaurante);
+        return Objects.equals(getId(), menu.getId()) && Objects.equals(getNombre(), menu.getNombre()) && Objects.equals(getProductos(), menu.getProductos());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, productos, restaurante);
+        return Objects.hash(getId(), getNombre(), getProductos());
     }
 }

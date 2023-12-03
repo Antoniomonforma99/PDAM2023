@@ -1,13 +1,11 @@
 package com.monteroantonio.PDAM23.model;
 
+import com.monteroantonio.PDAM23.security.user.User;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 @Builder
-public class Restaurante {
+public class DireccionEnvio {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -32,20 +30,20 @@ public class Restaurante {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String nombre;
-    private String direccion;
-    private String imgUrl;
-    private LocalTime horaApertura, horaCierre;
+    private String calle, numero, piso, puerta, poblacion, cp, ciudad;
+
+    @ManyToOne
+    private User usuario;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Restaurante that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getNombre(), that.getNombre()) && Objects.equals(getDireccion(), that.getDireccion()) && Objects.equals(getImgUrl(), that.getImgUrl()) && Objects.equals(getHoraApertura(), that.getHoraApertura()) && Objects.equals(getHoraCierre(), that.getHoraCierre());
+        if (!(o instanceof DireccionEnvio that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getCalle(), that.getCalle()) && Objects.equals(getNumero(), that.getNumero()) && Objects.equals(getPiso(), that.getPiso()) && Objects.equals(getPuerta(), that.getPuerta()) && Objects.equals(getPoblacion(), that.getPoblacion()) && Objects.equals(getCp(), that.getCp()) && Objects.equals(getCiudad(), that.getCiudad()) && Objects.equals(getUsuario(), that.getUsuario());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getDireccion(), getImgUrl(), getHoraApertura(), getHoraCierre());
+        return Objects.hash(getId(), getCalle(), getNumero(), getPiso(), getPuerta(), getPoblacion(), getCp(), getCiudad(), getUsuario());
     }
 }

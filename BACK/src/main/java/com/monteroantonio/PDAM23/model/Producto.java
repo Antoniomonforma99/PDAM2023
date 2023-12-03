@@ -45,16 +45,33 @@ public class Producto {
     @JoinColumn(name = "categoria", foreignKey = @ForeignKey(name = "FK_PRODUCTO_CATEGORIA"))
     private Categoria categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "restaurante", foreignKey = @ForeignKey(name = "FK_PRODUCTO_RESTAURANTE"))
-    private Restaurante restaurante ;
-
-    @ManyToMany(mappedBy = "productos",  fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "producto_id",
+                    foreignKey = @ForeignKey(name = "FK_TIENE_PRODUCTO")),
+                inverseJoinColumns = @JoinColumn(name = "menu_id",
+                    foreignKey = @ForeignKey(name = "FK_TIENE_MENU")),
+            name = "menu_productos"
+    )
     @Builder.Default
     private List<Menu> menus = new ArrayList<>();
 
 
     //Métodos helpers para gestionar las asociaciones bidireccionales
+
+    public void addMenu(Menu m){
+        if (this.getMenus() == null)
+            this.setMenus(new ArrayList<>());
+        this.getMenus().add(m);
+
+        if (m.getProductos() == null)
+            m.setProductos(new ArrayList<>());
+        m.getProductos().add(this);
+    }
+
+    public void removeMenu(Menu m) {
+        m.getProductos().remove(this);
+        this.getMenus().remove(m);
+    }
 
     public void addCategoria (Categoria c) {
         this.categoria = c;
@@ -65,28 +82,16 @@ public class Producto {
         c.getProductos().remove(this);
         this.categoria = null;
     }
-    public void addRestaurante(Restaurante res) {
-        this.restaurante = res;
-        res.getProductos().add(this);
-    }
-
-    public void removeRestaurante(Restaurante res) {
-        res.getProductos().remove(this);
-        this.restaurante = null;
-    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Producto producto)) return false;
-        return Objects.equals(id, producto.id) && Objects.equals(nombre, producto.nombre) && Objects.equals(descripcion, producto.descripcion) && Objects.equals(imgUrl, producto.imgUrl) && Objects.equals(precio, producto.precio) && Objects.equals(ingredientes, producto.ingredientes) && Objects.equals(restaurante, producto.restaurante) && Objects.equals(menus, producto.menus);
+        return Objects.equals(getId(), producto.getId()) && Objects.equals(getNombre(), producto.getNombre()) && Objects.equals(getDescripcion(), producto.getDescripcion()) && Objects.equals(getImgUrl(), producto.getImgUrl()) && Objects.equals(getPrecio(), producto.getPrecio()) && Objects.equals(getIngredientes(), producto.getIngredientes()) && Objects.equals(getCategoria(), producto.getCategoria()) && Objects.equals(getMenus(), producto.getMenus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, descripcion, imgUrl, precio, ingredientes, restaurante, menus);
+        return Objects.hash(getId(), getNombre(), getDescripcion(), getImgUrl(), getPrecio(), getIngredientes(), getCategoria(), getMenus());
     }
-
-
 }

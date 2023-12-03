@@ -32,6 +32,8 @@ public class Categoria {
 
     private String nombre;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productos;
 

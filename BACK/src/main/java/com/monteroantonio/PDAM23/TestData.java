@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,28 +33,22 @@ public class TestData {
                 .nombre("Masakali 1")
                 .direccion("C/ calle sin numero")
                 .imgUrl("imagen")
-                .productos(Collections.emptyList())
                 .horaApertura(LocalTime.NOON)
                 .horaCierre(LocalTime.MIDNIGHT)
                 .build();
 
-        Restaurante r2 = Restaurante.builder()
-                .nombre("Masakali 2")
-                .direccion("C/ calle con numero")
-                .imgUrl("imagen2")
-                .productos(Collections.emptyList())
-                .horaApertura(LocalTime.NOON)
-                .horaCierre(LocalTime.MIDNIGHT)
-                .build();
-
+        restauranteRepository.save(r1);
 
 
         Categoria c1 = Categoria.builder()
                 .nombre("Hamburgesas")
+                .productos(new ArrayList<>())
                 .build();
 
 
         categoriaRepository.save(c1);
+
+
 
         Producto p1 = Producto.builder()
                 .nombre("Hamburgeson")
@@ -66,7 +61,6 @@ public class TestData {
 
         Producto p2 = Producto.builder()
                 .nombre("Hamburgeson2")
-                .categoria(c1)
                 .descripcion("El hamburgueson2")
                 .imgUrl("url2")
                 .precio(9.95)
@@ -74,34 +68,29 @@ public class TestData {
                 .build();
 
 
+        c1.getProductos().add(p1);
+        p1.addCategoria(c1);
 
-        Menu m1 = Menu.builder()
-                .nombre("Supermenu")
-                .productos(List.of(p1, p2))
-                .build();
-
-
-
-        restauranteRepository.save(r1);
-        restauranteRepository.save(r2);
+        c1.getProductos().add(p2);
+        p2.addCategoria(c1);
 
         productoRepository.save(p1);
         productoRepository.save(p2);
 
 
 
+        Menu m1 = Menu.builder()
+                .nombre("Supermenu")
+                .productos(List.of(p1))
+                .build();
+
         menuRepository.save(m1);
 
-        m1.addRestaurante(r1);
+        p1.getMenus().add(m1);
+        p2.getMenus().add(m1);
 
-
-        /*p1.addRestaurante(r1);
-        p2.addRestaurante(r1);
-
-         */
-
-
-
+        productoRepository.save(p1);
+        productoRepository.save(p2);
 
 
 
