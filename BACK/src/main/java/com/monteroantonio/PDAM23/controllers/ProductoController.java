@@ -21,6 +21,6 @@ public class ProductoController {
 
     @GetMapping("/")
     PageDTO<ProductoResponseDTO> getAall(@PageableDefault(page = 0, size = 10)Pageable pageable) {
-        
+
     }
 }
