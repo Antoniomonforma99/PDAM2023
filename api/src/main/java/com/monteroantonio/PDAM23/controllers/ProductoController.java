@@ -101,7 +101,7 @@ public class ProductoController {
     @Operation(summary = "Elimina una categoria de un producto")
     @Parameter(description = "Id del prodcuto", name = "id", required = true)
     @Parameter(description = "Id de la categoria", name = "idCategoria", required = true)
-    @PostMapping("/{id}/addCategoria/{idCategoria}")
+    @DeleteMapping("/{id}/addCategoria/{idCategoria}")
     public ProductoResponseDTO deleteCategoria(
             @AuthenticationPrincipal User loggedUser,
             @PathVariable UUID id,
