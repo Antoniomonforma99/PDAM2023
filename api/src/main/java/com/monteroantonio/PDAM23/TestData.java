@@ -8,6 +8,9 @@ import com.monteroantonio.PDAM23.repository.CategoriaRepository;
 import com.monteroantonio.PDAM23.repository.MenuRepository;
 import com.monteroantonio.PDAM23.repository.ProductoRepository;
 import com.monteroantonio.PDAM23.repository.RestauranteRepository;
+import com.monteroantonio.PDAM23.security.user.Roles;
+import com.monteroantonio.PDAM23.security.user.User;
+import com.monteroantonio.PDAM23.security.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -25,9 +29,24 @@ public class TestData {
     private final RestauranteRepository restauranteRepository;
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
+    private final UserRepository userRepository;
 
     @PostConstruct
     public void initData(){
+
+        /*
+        User u1 = User.builder()
+                .name("Antonio Montero")
+                .email("antoniostudio2@gmail.com")
+                .password("12345678")
+                .roles(Set.of())
+                .tlf("635 95 14 07")
+                .build();
+
+        userRepository.save(u1);
+
+         */
+
 
         Restaurante r1 = Restaurante.builder()
                 .nombre("Masakali 1")

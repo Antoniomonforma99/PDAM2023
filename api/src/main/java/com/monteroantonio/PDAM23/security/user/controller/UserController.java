@@ -32,7 +32,7 @@ public class UserController {
 
 
     //Registra al user como Usuario (Cliente)
-    @PostMapping("auth/register")
+    @PostMapping("/auth/register")
     public ResponseEntity<UserResponseDTO> createUserWithUserRole(
             @RequestBody CreateUserRequestDTO createUserRequestDTO) {
 
@@ -44,7 +44,7 @@ public class UserController {
 
 
     //Registra al user como Admin
-    @PostMapping("auth/register/admin")
+    @PostMapping("/auth/register/admin")
     public ResponseEntity<UserResponseDTO> createUserWithAdminRole(
             @RequestBody CreateUserRequestDTO createUserRequestDTO) {
 
@@ -58,6 +58,30 @@ public class UserController {
     @Transactional
     @PostMapping("/auth/login")
     public ResponseEntity<JwtUserResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginRequestDTO.getUsername(),
+                                loginRequestDTO.getPassword()
+                        )
+                );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtProvider.generateToken(authentication);
+        User user = (User) authentication.getPrincipal();
+
+        refreshTokenService.deleteByUser(user);
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(JwtUserResponseDTO.of(user, token, refreshToken.getToken()));
+
+    }
+    //Login ADMIN
+    @Transactional
+    @PostMapping("/auth/login/admin")
+    public ResponseEntity<JwtUserResponseDTO> loginAdmin(@RequestBody LoginRequestDTO loginRequestDTO) {
 
         Authentication authentication =
                 authenticationManager.authenticate(

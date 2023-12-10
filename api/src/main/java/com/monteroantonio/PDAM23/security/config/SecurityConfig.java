@@ -71,6 +71,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(requests -> requests
                         //.antMatchers("/auth/register/admin").hasRole("ADMIN")
+                        .antMatchers("/auth/register").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/auth/login").hasAnyRole("ADMIN", "USER")
+                        //.antMatchers("/auth/login/admin").hasRole("ADMIN")
                         .antMatchers("/me/**").authenticated()
                         .antMatchers("/user/**").authenticated()
                         .anyRequest().permitAll());

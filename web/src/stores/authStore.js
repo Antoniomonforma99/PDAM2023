@@ -30,7 +30,7 @@ export default defineStore('auth', {
         async login(email, password, rememberMe) {
 
             
-            const url = import.meta.env.VITE_VUE_APP_API_URL + '/auth/login';
+            const url = import.meta.env.VITE_VUE_APP_API_URL + '/auth/login/admin';
             const authParams = {
                 username: email,
                 password: password

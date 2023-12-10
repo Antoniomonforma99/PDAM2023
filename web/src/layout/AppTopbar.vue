@@ -71,10 +71,10 @@ const isOutsideClicked = (event) => {
     return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
 };
 
-function goToDistributorProfile(){
+function goToProfile(){
     router.push(
         {
-            name : 'distributor-profile'
+            name : 'profile'
         }
     )   
 }
@@ -106,7 +106,7 @@ function goToDistributorProfile(){
                 <i class="pi pi-cog"></i>
                 <span>Configuración</span>
             </button> -->
-            <button @click="goToDistributorProfile()" class="p-link layout-topbar-button">
+            <button @click="goToProfile()" class="p-link layout-topbar-button">
                 <i class="pi pi-user"></i>
                 <span>Perfil</span>
             </button>

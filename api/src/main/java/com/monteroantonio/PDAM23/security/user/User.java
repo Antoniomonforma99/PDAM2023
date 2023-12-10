@@ -49,13 +49,6 @@ public class User implements UserDetails {
     private String name;
     private String tlf;
 
-    /*
-    @PostConstruct
-    private void stablishUsername(){
-        this.username = this.email;
-    }
-
-     */
     @Builder.Default
     private boolean accountNonExpired = true;
     @Builder.Default

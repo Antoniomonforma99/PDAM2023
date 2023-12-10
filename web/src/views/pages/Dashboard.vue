@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <p>Login done! {{ user.id }}</p>
+    <p>Login done! </p>
 </template>
 
 <style ></style>
