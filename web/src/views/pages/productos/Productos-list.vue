@@ -19,6 +19,14 @@ async function getProductos() {
     });
 }
 
+function goToNewProducto() {
+        router.push(
+            {
+                name : 'producto-new'
+            }
+        )
+    }
+
 onMounted(() => {
     getProductos();
     
@@ -27,9 +35,16 @@ onMounted(() => {
 </script>
 
 <template>
-            <div class="col-12">
+    <div class="grid">
+        <div class="col-12">
             <div class="card">
-                <h5>Productos</h5>
+                <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                    <h4 class="ml-3">PRODUCTOS ({{ productos.length }})</h4>
+                    <div style="display: flex;" class="ml-5">
+                        <Button @click="goToNewProducto()" label="Nuevo producto" outlined class="mr-5" />
+                    </div>
+                </div>
+                <br>
                 <DataView :value="productos" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
                     <template #header>
                         <div class="grid grid-nogutter">
@@ -89,6 +104,7 @@ onMounted(() => {
                 </DataView>
             </div>
         </div>
+    </div>
 </template>
 
 <style lang="scss" scoped></style>

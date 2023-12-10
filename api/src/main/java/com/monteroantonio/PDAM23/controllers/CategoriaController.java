@@ -24,9 +24,19 @@ public class CategoriaController {
 
     @Operation(summary = "Obtiene todas las categorias")
     @JsonView({View.CategoriaView.CategoriaGenericView.class})
-    @GetMapping("/{id}")
+    @GetMapping("/")
     public List<CategoriaResponseDTO> findAll() {
         return service.findAll().stream().map(CategoriaResponseDTO::of).toList();
+    }
+
+    @Operation(summary = "Crea una nueva categoría")
+    @JsonView({View.CategoriaView.CategoriaGenericView.class})
+    @PostMapping("/new")
+    public CategoriaResponseDTO create(
+            @AuthenticationPrincipal User loggedUser,
+            @Valid @RequestBody CategoriaRequestDTO categoriaRequestDTO
+    ) {
+        return CategoriaResponseDTO.of(service.add(categoriaRequestDTO.toCategoria()));
     }
 
     @Operation(summary = "Edita una categoria por su id")

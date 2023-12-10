@@ -25,9 +25,24 @@ const router = createRouter({
                     component : () => import('@/views/pages/productos/Productos-list.vue')
                 },
                 {
+                    path : '/productos/new',
+                    name : 'producto-new',
+                    component : () => import('@/views/pages/productos/Producto-new.vue')
+                },
+                {
                     path : '/menus',
                     name : 'menus-list',
                     component : () => import('@/views/pages/menus/Menus-list.vue')
+                },
+                {
+                    path : '/categorias',
+                    name : 'categorias-list',
+                    component : () => import('@/views/pages/categorias/Categorias-list.vue')
+                },
+                {
+                    path : '/categorias/new',
+                    name : 'categoria-new',
+                    component : () => import('@/views/pages/categorias/Categoria-new.vue')
                 },
                 {
                     path : '/personal',

@@ -25,6 +25,15 @@ const model = ref([
         ]
     },
     {
+        label: 'GESTIÓN DE CATEGORÍAS',
+        items: [
+                    {
+                        label: 'VER CATEGORÍAS',
+                        to: '/categorias'
+                    }
+        ]
+    },
+    {
         label: 'GESTIÓN DE PERSONAL',
         items: [
                     {

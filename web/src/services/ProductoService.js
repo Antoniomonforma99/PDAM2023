@@ -32,9 +32,6 @@ export default class ProductoService {
             .then((res) => {
                     success = 1;   
                     productos = res.data.contenido;
-
-                    
-
             })
             .catch((error) => {
                 console.log(error);
@@ -54,6 +51,8 @@ export default class ProductoService {
             return productos;
             
     }
+
+    
 
 
 }

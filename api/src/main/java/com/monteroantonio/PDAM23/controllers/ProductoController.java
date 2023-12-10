@@ -62,7 +62,7 @@ public class ProductoController {
 
     @Operation(summary = "Crea un producto")
     @JsonView(View.ProductoView.ProductoDetailedView.class)
-    @PostMapping("/")
+    @PostMapping("/new")
     public ResponseEntity<ProductoResponseDTO> create (
             @AuthenticationPrincipal User loggedUser,
             @RequestPart("file") MultipartFile file,
@@ -101,7 +101,7 @@ public class ProductoController {
     @Operation(summary = "Elimina una categoria de un producto")
     @Parameter(description = "Id del prodcuto", name = "id", required = true)
     @Parameter(description = "Id de la categoria", name = "idCategoria", required = true)
-    @DeleteMapping("/{id}/addCategoria/{idCategoria}")
+    @DeleteMapping("/{id}/deleteCategoria/{idCategoria}")
     public ProductoResponseDTO deleteCategoria(
             @AuthenticationPrincipal User loggedUser,
             @PathVariable UUID id,

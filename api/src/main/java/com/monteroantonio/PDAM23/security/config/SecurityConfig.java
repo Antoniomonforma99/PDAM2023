@@ -73,6 +73,15 @@ public class SecurityConfig {
                         //.antMatchers("/auth/register/admin").hasRole("ADMIN")
                         .antMatchers("/auth/register").hasAnyRole("ADMIN", "USER")
                         .antMatchers("/auth/login").hasAnyRole("ADMIN", "USER")
+
+                        .antMatchers("/categoria/").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/categoria/new").hasRole("ADMIN")
+                        .antMatchers("/categoria/{id}").hasAnyRole("ADMIN", "USER")
+
+                        .antMatchers("/producto/").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/producto/new").hasRole("ADMIN")
+                        .antMatchers("/producto/{id}").hasAnyRole("ADMIN", "USER")
+
                         //.antMatchers("/auth/login/admin").hasRole("ADMIN")
                         .antMatchers("/me/**").authenticated()
                         .antMatchers("/user/**").authenticated()
