@@ -47,8 +47,9 @@ public class ProductoService {
     }
 
     @Transactional
-    public Producto add(Producto producto, User loggedUser, MultipartFile file) {
+    public Producto add(Producto producto, Categoria categoria, User loggedUser, MultipartFile file) {
         producto.setImgUrl(storageService.store(file));
+        producto.setCategoria(categoria);
         return repository.save(producto);
     }
 

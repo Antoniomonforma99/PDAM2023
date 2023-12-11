@@ -89,7 +89,7 @@ onMounted(() => {
                                     <!-- <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{ slotProps.data.inventoryStatus }}</span> -->
                                 </div>
                                 <div class="text-center">
-                                    <img :src="'demo/images/product/' + slotProps.data.imgUrl" :alt="slotProps.data.nombre" class="w-9 shadow-2 my-3 mx-0" />
+                                    <img :src="'http://localhost:8080/download/' + slotProps.data.imgUrl" :alt="slotProps.data.nombre" class="w-9 shadow-2 my-3 mx-0" />
                                     <div class="text-2xl font-bold">{{ slotProps.data.nombre }}</div>
                                     <div class="mb-3">{{ slotProps.data.descripcion }}</div>
                                     <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false"></Rating>

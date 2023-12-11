@@ -1,11 +1,13 @@
 package com.monteroantonio.PDAM23.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.monteroantonio.PDAM23.model.Categoria;
 import com.monteroantonio.PDAM23.model.DTOs.Page.PageDTO;
 import com.monteroantonio.PDAM23.model.DTOs.producto.ProductoRequestDTO;
 import com.monteroantonio.PDAM23.model.DTOs.producto.ProductoResponseDTO;
 import com.monteroantonio.PDAM23.model.view.View;
 import com.monteroantonio.PDAM23.security.user.User;
+import com.monteroantonio.PDAM23.services.CategoriaService;
 import com.monteroantonio.PDAM23.services.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +30,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductoController {
 
-    public final ProductoService service;
+    private final ProductoService service;
+    private final CategoriaService categoriaService;
 
     @Operation(summary = "Obtiene todos los productos")
     @PageableAsQueryParam
@@ -69,9 +72,12 @@ public class ProductoController {
             @Valid @RequestPart("body") ProductoRequestDTO productoRequestDTO
             ){
 
+        Categoria categoria = categoriaService.findById(productoRequestDTO.getIdCategoria());
+
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
-                        ProductoResponseDTO.of(service.add(productoRequestDTO.toProducto() , loggedUser, file))
+                        ProductoResponseDTO.of(service.add(productoRequestDTO.toProducto(), categoria, loggedUser, file))
                 );
     }
 
