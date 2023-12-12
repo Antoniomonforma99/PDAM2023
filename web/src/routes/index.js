@@ -30,6 +30,11 @@ const router = createRouter({
                     component : () => import('@/views/pages/productos/Producto-new.vue')
                 },
                 {
+                    path : '/productos/:idProducto',
+                    name : 'producto-detail',
+                    component : () => import('@/views/pages/productos/Producto-detail.vue')
+                },
+                {
                     path : '/menus',
                     name : 'menus-list',
                     component : () => import('@/views/pages/menus/Menus-list.vue')
@@ -48,6 +53,11 @@ const router = createRouter({
                     path : '/personal',
                     name : 'personal-list',
                     component : () => import('@/views/pages/personal/Personal-list.vue')
+                },
+                {
+                    path : '/personal/nuevoUsuario',
+                    name : 'personal-new',
+                    component : () => import('@/views/pages/personal/Nuevo-usuario.vue')
                 },
             ]
         },

@@ -25,7 +25,17 @@ function goToNewProducto() {
                 name : 'producto-new'
             }
         )
-    }
+}
+
+function goToProductoDetail(idProducto) {
+    console.log("CLICK");
+        router.push(
+            {
+                name : 'producto-detail',
+                params : {idProducto}
+            }
+        )
+}
 
 onMounted(() => {
     getProductos();
@@ -61,7 +71,7 @@ onMounted(() => {
                             <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
                                 <img :src="'demo/images/product/' + slotProps.data.nombre" :alt="slotProps.data.nombre" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5" />
                                 <div class="flex-1 text-center md:text-left">
-                                    <div class="font-bold text-2xl">{{ slotProps.data.nombre }}</div>
+                                    <div class="font-bold text-2xl"> {{ slotProps.data.nombre }}</div>
                                     <div class="mb-3">{{ slotProps.data.descripcion }}</div>
                                     <!-- <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" class="mb-2"></Rating> -->
                                     <div class="flex align-items-center">
@@ -90,9 +100,9 @@ onMounted(() => {
                                 </div>
                                 <div class="text-center">
                                     <img :src="'http://localhost:8080/download/' + slotProps.data.imgUrl" :alt="slotProps.data.nombre" class="w-9 shadow-2 my-3 mx-0" />
-                                    <div class="text-2xl font-bold">{{ slotProps.data.nombre }}</div>
+                                    <div @click="goToProductoDetail(slotProps.data.id)" class=" pointer text-2xl font-bold">{{ slotProps.data.nombre }}</div>
                                     <div class="mb-3">{{ slotProps.data.descripcion }}</div>
-                                    <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false"></Rating>
+                                    <Rating :modelValue="slotProps.data.valoracionMedia" :readonly="true" :cancel="false"></Rating>
                                 </div>
                                 <div class="flex align-items-center justify-content-between">
                                     <span class="text-2xl font-semibold">${{ slotProps.data.precio }}</span>
@@ -107,4 +117,8 @@ onMounted(() => {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .pointer {
+        cursor : pointer;
+    }
+</style>
