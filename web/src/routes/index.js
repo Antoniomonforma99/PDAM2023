@@ -35,6 +35,11 @@ const router = createRouter({
                     component : () => import('@/views/pages/productos/Producto-detail.vue')
                 },
                 {
+                    path : '/productos/edit/:idProducto',
+                    name : 'producto-edit',
+                    component : () => import('@/views/pages/productos/Producto-edit.vue')
+                },
+                {
                     path : '/menus',
                     name : 'menus-list',
                     component : () => import('@/views/pages/menus/Menus-list.vue')

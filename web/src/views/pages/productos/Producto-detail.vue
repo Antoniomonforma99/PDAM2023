@@ -30,11 +30,38 @@
             
     }
 
+    function gotoEditProducto(idProducto) {
+        router.push(
+            { name : 'producto-edit',
+            params : {idProducto}}
+        )
+    }
+
     onMounted(() => {
         idProducto.value = route.params.idProducto;
         getProductoById(idProducto.value);
        
     });
+
+    async function deleteProducto(id) {
+        await productoService.deleteProducto(id);
+
+        toast.add({
+                        severity : 'success',
+                        summary: 'Producto eliminado',
+                        life : 1500
+                    })
+
+        setTimeout(() => {
+            router.push(
+            {
+                name : 'productos-list'
+            }
+        )
+        }, 1500)
+
+
+    }
 
     function muestra(){
         console.log(producto.value.ingredientes)
@@ -43,6 +70,7 @@
 </script>
 
 <template>
+    <Toast position="top-center" />
 
         <div class="col-12">
             <div class="card">
@@ -70,8 +98,8 @@
                         </div>
                     </div>
                     <div class="col-12 container">
-                        <button class="col-6">ELIMINAR PRODUCTO</button>
-                        <button class="col-6">EDITAR PRODUCTO</button>
+                        <button @click="deleteProducto(producto.id)" class="col-6">ELIMINAR PRODUCTO</button>
+                        <button @click="gotoEditProducto(producto.id)" class="pointer col-6">EDITAR PRODUCTO</button>
                     </div>
                 </div>
                     
@@ -81,4 +109,7 @@
     
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .pointer {
+        cursor : pointer;
+    }</style>

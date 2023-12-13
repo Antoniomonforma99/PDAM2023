@@ -1,6 +1,7 @@
 package com.monteroantonio.PDAM23.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.monteroantonio.PDAM23.model.Categoria;
 import com.monteroantonio.PDAM23.model.DTOs.categoria.CategoriaRequestDTO;
 import com.monteroantonio.PDAM23.model.DTOs.categoria.CategoriaResponseDTO;
 import com.monteroantonio.PDAM23.model.view.View;
@@ -8,12 +9,15 @@ import com.monteroantonio.PDAM23.security.user.User;
 import com.monteroantonio.PDAM23.services.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,6 +52,18 @@ public class CategoriaController {
             @Valid @RequestBody CategoriaRequestDTO categoriaRequestDTO
             ) {
         return CategoriaResponseDTO.of(service.edit(categoriaRequestDTO, id));
+    }
+
+    @Operation(summary = "Obitene una categoria por su id")
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Categoria>> getById(
+            @AuthenticationPrincipal User loggedUser,
+            @PathVariable UUID id
+    ) {
+
+        List<Categoria> categorias = service.findAll();
+
+        return ResponseEntity.ok(categorias);
     }
 
 }

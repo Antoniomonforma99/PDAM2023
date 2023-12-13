@@ -1,5 +1,7 @@
 package com.monteroantonio.PDAM23.security.user.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.monteroantonio.PDAM23.model.DTOs.Page.PageDTO;
 import com.monteroantonio.PDAM23.security.jwt.access.JwtProvider;
 import com.monteroantonio.PDAM23.security.jwt.refresh.RefreshToken;
 import com.monteroantonio.PDAM23.security.jwt.refresh.RefreshTokenException;
@@ -8,7 +10,12 @@ import com.monteroantonio.PDAM23.security.jwt.refresh.RefreshTokenService;
 import com.monteroantonio.PDAM23.security.user.User;
 import com.monteroantonio.PDAM23.security.user.dto.*;
 import com.monteroantonio.PDAM23.security.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -150,4 +158,19 @@ public class UserController {
                                           @AuthenticationPrincipal User loggedUser){
         return UserResponseDTO.fromUser(service.editPassword(loggedUser, changePasswordRequestDTO));
     }
+
+    /*
+    @Operation(summary = "Obtiene todos los usuarios admin")
+    @PageableAsQueryParam
+    @GetMapping("/getAdminUsers")
+    public PageDTO<UserResponseDTO> getAllAdminUsers(
+            @AuthenticationPrincipal User loggedUser,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        PageDTO<UserResponseDTO> responseDTOS = new PageDTO<>();
+
+        return responseDTOS.of(service.findAllAdminUsers(pageable));
+    }
+
+     */
 }

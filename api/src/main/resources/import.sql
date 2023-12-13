@@ -1,0 +1,2 @@
+insert into user_entity (account_non_expired, account_non_locked, created_at, credentials_non_expired, email, enabled, last_password_change_at, nombre, password, username, id) values (true, true, '2022-02-18', true, 'tnicely0@eepurl.com', true, '2023-02-09', 'Truda', '{bcrypt}$2a$12$ORWJZr4ph1SCADgUV.JoGOug2qlzPVU8s7GnRQiOLP.R8Uq/vxHyW', 'tgerrets0', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');
+insert into user_roles (user_id, roles) values ('eb0b467d-119b-481d-b204-7ffcdf9acb99', 2); -- Contraseña : 'G18BonYqt'

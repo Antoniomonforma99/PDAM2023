@@ -83,13 +83,14 @@ public class ProductoController {
 
     @Operation(summary = "Edita un producto")
     @Parameter(description = "Id del producto a editar", name = "id", required = true)
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ProductoResponseDTO edit(
             @AuthenticationPrincipal User loggedUser,
             @PathVariable UUID uuid,
             @Valid @RequestBody ProductoRequestDTO productoRequestDTO
     ) {
-        return ProductoResponseDTO.of(service.edit(uuid, loggedUser, productoRequestDTO));
+        Categoria categoria = categoriaService.findById(productoRequestDTO.getIdCategoria());
+        return ProductoResponseDTO.of(service.edit(uuid, productoRequestDTO, categoria, loggedUser));
     }
 
     @Operation(summary = "Añade una categoria a un producto")

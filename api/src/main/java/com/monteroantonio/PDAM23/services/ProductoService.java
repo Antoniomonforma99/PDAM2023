@@ -58,12 +58,13 @@ public class ProductoService {
     }
 
     @Transactional
-    public Producto edit(UUID id, User loggedUser, ProductoRequestDTO productoRequestDTO) {
+    public Producto edit(UUID id, ProductoRequestDTO productoRequestDTO, Categoria categoria, User loggedUser) {
+
         return repository.findById(id).map(p -> {
             p.setNombre(productoRequestDTO.getNombre());
             p.setDescripcion(productoRequestDTO.getDescripcion());
             p.setPrecio(productoRequestDTO.getPrecio());
-            p.setMenus(productoRequestDTO.getMenus());
+            p.setCategoria(categoria);
             p.setIngredientes(productoRequestDTO.getIngredientes());
 
             return repository.save(p);

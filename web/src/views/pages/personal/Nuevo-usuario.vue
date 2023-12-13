@@ -10,9 +10,13 @@ const tlf = ref('');
 const contrasenya = ref('');
 const repetirContrasenya = ref('');
 
+const toast = useToast();
+
 const profileService = new ProfileService();
 
 async function createUser() {
+console.log("click");
+
     let createUserRequestDTO = {
         name : name.value,
         email : email.value,
@@ -38,9 +42,10 @@ async function createUser() {
                 life : 3000
             })
         }
-        })
-        router.push('/personal')
-
+        });
+        setTimeout(() => {
+            router.push('/personal')
+        }, 1500);
 }
 
 </script>

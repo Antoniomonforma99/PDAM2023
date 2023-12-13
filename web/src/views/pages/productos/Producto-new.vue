@@ -86,6 +86,7 @@ onMounted(() => {
 </script>
 
 <template>
+    <div></div>
     <Toast position="top-center" />
 
     <div class="grid">
@@ -120,7 +121,7 @@ onMounted(() => {
                     </div>
                     <div class="field col-12 md:col-12">
                         <label for="imagen">Imágenes</label>
-                        <!-- <FileUpload name="demo[]" @uploader="onUpload" :multiple="true"  accept="image/*" :maxFileSize="1000000" customUpload />  -->
+                        
                         <input type="file" @change="onUpload" accept="image/*" />
                     </div>
                     
@@ -129,7 +130,6 @@ onMounted(() => {
             </div>
         </div>
     </div>
-
 </template>
 
 <style lang="scss" scoped>

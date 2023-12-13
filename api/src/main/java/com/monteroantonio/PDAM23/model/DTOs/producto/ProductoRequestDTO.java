@@ -30,9 +30,6 @@ public class ProductoRequestDTO {
     @NotEmpty
     private List<String> ingredientes;
 
-    private List<Menu> menus;
-
-    //private CategoriaRequestDTO categoria;
     private UUID idCategoria;
 
     public Producto toProducto() {
@@ -42,7 +39,6 @@ public class ProductoRequestDTO {
                 .precio(precio)
                 .descripcion(descripcion)
                 .ingredientes(ingredientes)
-                .menus(menus)
                 //.categoria(categoriaSeleccionada)
                 .build();
     }

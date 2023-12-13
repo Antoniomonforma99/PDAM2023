@@ -5,8 +5,11 @@ import com.monteroantonio.PDAM23.security.user.Roles;
 import com.monteroantonio.PDAM23.security.user.User;
 import com.monteroantonio.PDAM23.security.user.dto.ChangePasswordRequestDTO;
 import com.monteroantonio.PDAM23.security.user.dto.CreateUserRequestDTO;
+import com.monteroantonio.PDAM23.security.user.dto.UserResponseDTO;
 import com.monteroantonio.PDAM23.security.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -86,6 +89,19 @@ public class UserService {
     public boolean passwordMatch(User user, String clearPassword) {
         return passwordEncoder.matches(clearPassword, user.getPassword());
     }
+
+    /*
+    public Page<UserResponseDTO> findAllAdminUsers(
+            Pageable pageable
+    ){
+        Page<UserResponseDTO> result = repository.findAllAdminUsers(pageable);
+        if (result.getContent().isEmpty()) {
+            throw new EntityNotFoundException("No hay usuarios");
+        }
+        return result;
+    }
+
+     */
 
 
 }
