@@ -59,6 +59,8 @@ public class ProductoController {
             @AuthenticationPrincipal User loggedUser,
             @PathVariable UUID id
             ){
+        if (service.findById(id) == null)
+            return ResponseEntity.noContent().build();
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }

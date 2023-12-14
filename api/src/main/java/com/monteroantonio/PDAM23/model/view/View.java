@@ -11,4 +11,8 @@ public class View {
     public static interface CategoriaView {
         public static interface  CategoriaGenericView{}
     }
+
+    public static interface DireccionEnvioView {
+        public static interface DireccionGenericView{}
+    }
 }

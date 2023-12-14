@@ -8,6 +8,7 @@ import com.monteroantonio.PDAM23.model.view.View;
 import com.monteroantonio.PDAM23.security.user.User;
 import com.monteroantonio.PDAM23.services.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,5 +66,19 @@ public class CategoriaController {
 
         return ResponseEntity.ok(categorias);
     }
+
+    @Operation(summary = "Borra una categoria por su id")
+    @Parameter(description = "Id de la categoria", name = "id", required = true)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete (
+            @AuthenticationPrincipal User loggedUser,
+            @PathVariable UUID id
+    ){
+        if (service.findById(id) == null)
+            return ResponseEntity.noContent().build();
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

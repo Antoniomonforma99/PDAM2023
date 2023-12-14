@@ -50,6 +50,7 @@ public class ProductoService {
     public Producto add(Producto producto, Categoria categoria, User loggedUser, MultipartFile file) {
         producto.setImgUrl(storageService.store(file));
         producto.setCategoria(categoria);
+
         return repository.save(producto);
     }
 
