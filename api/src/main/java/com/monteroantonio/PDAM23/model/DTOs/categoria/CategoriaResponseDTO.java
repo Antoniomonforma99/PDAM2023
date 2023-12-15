@@ -21,24 +21,17 @@ public class CategoriaResponseDTO {
     @JsonView({View.CategoriaView.CategoriaGenericView.class, View.ProductoView.ProductoGenericView.class, View.ProductoView.ProductoDetailedView.class})
     private String nombre;
 
-    /*
-    @JsonView({View.CategoriaView.CategoriaGenericView.class, View.ProductoView.ProductoGenericView.class})
-    private List<ProductoResponseDTO> productos;
 
-     */
 
 
     public static CategoriaResponseDTO of (Categoria c) {
         if (c == null)
             return null;
 
-        List<ProductoResponseDTO> prods = c.getProductos().stream().map(ProductoResponseDTO::of).toList();
-
         return CategoriaResponseDTO
                 .builder()
                 .id(c.getId())
                 .nombre(c.getNombre())
-                //.productos(prods)
                 .build();
     }
 }

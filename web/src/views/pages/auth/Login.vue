@@ -94,7 +94,7 @@ function checkFields() {
             <div style="border-radius: 56px; padding: 0.3rem;">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5 logo-text">
-                        <img :src="logoUrl" alt="TuKomida logo" class="mb-2 w-10rem flex-shrink-0" />
+                        <img src="../../../assets/img/logo.PNG" alt="TuKomida logo" class="mb-2 w-10rem flex-shrink-0" />
                     </div>
 
                     <div>

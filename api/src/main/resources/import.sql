@@ -1,2 +1,8 @@
-insert into user_entity (account_non_expired, account_non_locked, created_at, credentials_non_expired, email, enabled, last_password_change_at, nombre, password, username, id) values (true, true, '2022-02-18', true, 'tnicely0@eepurl.com', true, '2023-02-09', 'Truda', '{bcrypt}$2a$12$ORWJZr4ph1SCADgUV.JoGOug2qlzPVU8s7GnRQiOLP.R8Uq/vxHyW', 'tgerrets0', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');
-insert into user_roles (user_id, roles) values ('eb0b467d-119b-481d-b204-7ffcdf9acb99', 2); -- Contraseña : 'G18BonYqt'
+insert into user_entity (account_non_expired, account_non_locked, created_at, credentials_non_expired, email, enabled, last_password_change_at, name, password, username, id) values (true, true, '2023-10-12', true, 'tukomidadmin@gmail.com', true, '2023-02-09', 'Antonio Montero Admin', '{bcrypt}$2a$12$IWgRkMUU8g02q0MIXueYY.6gMoV/YyHoir6K6Q6zj9kIMLkQ9ZH6C', 'tukomidadmin@gmail.com', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');
+insert into user_roles (user_id, roles) values ('eb0b467d-119b-481d-b204-7ffcdf9acb99', 0); -- Contraseña : '1234'
+
+insert into user_entity (account_non_expired, account_non_locked, created_at, credentials_non_expired, email, enabled, last_password_change_at, name, password, username, id) values (true, true, '2023-10-12', true, 'tukomidauser@gmail.com', true, '2023-02-09', 'Antonio Montero User', '{bcrypt}$2a$12$IWgRkMUU8g02q0MIXueYY.6gMoV/YyHoir6K6Q6zj9kIMLkQ9ZH6C', 'tukomidadmin@gmail.com', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');
+insert into user_roles (user_id, roles) values ('eb0b467d-119b-481d-b204-7ffcdf9acb99', 1); -- Contraseña : '1234'
+
+INSERT INTO direccion_envio (id, calle, poblacion, ciudad, cp, numero, piso, puerta, usuario_id) VALUES ('d28185d7-47b8-45b9-bb6e-94d2a2c5235f', 'Lopez de Gomara', 'Sevilla', 'Sevilla', '41010', '21', '2', 'A', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');
+INSERT INTO direccion_envio (id, calle, poblacion, ciudad, cp, numero, piso, puerta, usuario_id) VALUES ('3d5d6f7a-2a07-42d3-a3bb-bd3a61a66ea8', 'Juan diaz de solís', 'Sevilla', 'Sevilla', '41010', '18', '1', 'C', 'eb0b467d-119b-481d-b204-7ffcdf9acb99');

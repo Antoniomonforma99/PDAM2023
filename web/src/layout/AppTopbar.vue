@@ -19,13 +19,6 @@ onBeforeUnmount(() => {
     unbindOutsideClickListener();
 });
 
-const logoUrl = computed(() => {
-    if (layoutConfig.darkTheme.value) {
-        return '/admin/layout/images/logo-numier-blanco.png'
-    } else {
-        return '/admin/layout/images/logo-numier-azul.png'
-    }
-});
 
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
@@ -83,9 +76,9 @@ function goToProfile(){
 <template>
     <div class="layout-topbar">
         <router-link to="/dashboard" class="layout-topbar-logo">
-            <img :src="logoUrl" alt="logo" />
+            
             <span class="dot">·</span>
-            <span>canal de distribución</span>
+            
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
