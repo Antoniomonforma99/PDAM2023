@@ -1,0 +1,797 @@
+{
+	"info": {
+		"_postman_id": "1e6cd610-011a-4bc3-b69f-bb8ce4cf8290",
+		"name": "PDAM23",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24957083"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "CREATE USER WITH USER ROLE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"antonio montero\",\r\n    \"email\" : \"antoniostudio@gmail.com\",\r\n    \"password\" : \"12345678\",\r\n    \"verifyPassword\" : \"12345678\",\r\n    \"tlf\" : \"635 95 14 07\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER WITH ADMIN ROLE",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"antonio montero\",\r\n    \"email\" : \"antoniostudio2@gmail.com\",\r\n    \"password\" : \"1234\",\r\n    \"verifyPassword\" : \"1234\",\r\n    \"tlf\" : \"635 95 14 07\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"antoniostudio@gmail.com\",\r\n    \"password\" : \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"antoniostudio2@gmail.com\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GEN REFRESH TOKEN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\" : \"f32d1bdf-bac7-4cd3-86ba-7688650b161f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/refreshToken",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER DATA",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzVmLTE1MGItODE4Yy01Zjg1NTQ3ZjAwMDUiLCJpYXQiOjE3MDI0MTkyMzgsImV4cCI6MTcwMjQyMjgzOH0.nRP3D1E943kGuVS-YT9A4_DU_Zf4VFTVivfn3QCrNT8nEu_kjhuFul9G2y67zIwCChIBflQJzAaqJnpjOaYpNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER PASSWORD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTExMWQtODE4Yy02OTEyYzQ5ODAwMDUiLCJpYXQiOjE3MDI1Njk4OTMsImV4cCI6MTcwMjU3MzQ5M30.zzu3jlVw0gtzJpfAsjm0jpcbdKuM9oYhYYzGq7eYLa79V2flLeaOAhxrvwU7jNbofwYVs8B-oUvhMhLVfRHZIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\" : \"1234\",\r\n    \"newPassword\" : \"123456789\",\r\n    \"verifyNewPassword\" : \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/changePassword",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzA2LTFjN2YtODE4Yy0wNmFjYThjNjAwMDAiLCJpYXQiOjE3MDA5MTkwMzgsImV4cCI6MTcwMDkyMjYzOH0.Fk8Tylkyv1j4ujxQFXE34k4VoHdlBrV60FLQp4fBA4P6ivb78mp_1ChxnecYwiQ9p1zdIfXFhohONxLIuUraEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/deleteAccount",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"deleteAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALL ADMIN USERS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzVmLTE1MGItODE4Yy01Zjg1NTQ3ZjAwMDUiLCJpYXQiOjE3MDI0MTkyMzgsImV4cCI6MTcwMjQyMjgzOH0.nRP3D1E943kGuVS-YT9A4_DU_Zf4VFTVivfn3QCrNT8nEu_kjhuFul9G2y67zIwCChIBflQJzAaqJnpjOaYpNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getAdminUsers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getAdminUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCTOS",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTExMWQtODE4Yy02OTEyYzQ5ODAwMDUiLCJpYXQiOjE3MDI1Njk4OTMsImV4cCI6MTcwMjU3MzQ5M30.zzu3jlVw0gtzJpfAsjm0jpcbdKuM9oYhYYzGq7eYLa79V2flLeaOAhxrvwU7jNbofwYVs8B-oUvhMhLVfRHZIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/producto/?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzYyLTFkMTktODE4Yy02MmJkN2U5YjAwMDUiLCJpYXQiOjE3MDI0NjQwMzMsImV4cCI6MTcwMjQ2NzYzM30.IwYczA_jVS-VPE01MzpbDXp06eK3b8364bVm4B6ta8gf93bmr35uJ1KwP-7uLZwZ0a3I9AFX3iULzQZF3u70aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/producto/c0a80187-8c62-1d19-818c-62bd1eb60002",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"c0a80187-8c62-1d19-818c-62bd1eb60002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTExMWQtODE4Yy02OTEyYzQ5ODAwMDUiLCJpYXQiOjE3MDI1Njk4OTMsImV4cCI6MTcwMjU3MzQ5M30.zzu3jlVw0gtzJpfAsjm0jpcbdKuM9oYhYYzGq7eYLa79V2flLeaOAhxrvwU7jNbofwYVs8B-oUvhMhLVfRHZIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productoRequestDTO",
+									"value": "{\n    \"nombre\" : \"Producto nuevo\",\n    \"precio\" : 9.96,\n    \"description\" : \"Nuevo plato suculento\",\n    \"ingredientes\" : [\"Ingrediente 1\", \"Ingrediente 2\", \"Ingrediente 3\"],\n    \"idCategoria\" : \"c0a80187-8c5a-1dcb-818c-5a9dd0de0001\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Monty/Desktop/pngwing.com.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/producto/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzZhLTE5NTEtODE4Yy02YTY5YTJkNzAwMDUiLCJpYXQiOjE3MDI1OTIzNTksImV4cCI6MTcwMjU5NTk1OX0.zxM0r6JfoCpx3IRNfUV7YQrG2NAE99uRytHpV5td49jxgvXhbYKnYPnNGqv-h4n-glrdgGzZXq9tKnEcrJrp9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Hamburguesote\",\r\n    \"precio\" : 2.99,\r\n    \"descripcion\" : \"Una peazo de burguer\",\r\n    \"ingredientes\" : [\"carne\", \"pescado\"],\r\n    \"idCategoria\" : \"c0a80187-8c6a-1951-818c-6a6956df0001\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/producto/edit/c0a80187-8c69-1b37-818c-693b3d880002",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"edit",
+								"c0a80187-8c69-1b37-818c-693b3d880002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTExMWQtODE4Yy02OTEyYzQ5ODAwMDUiLCJpYXQiOjE3MDI1Njk4OTMsImV4cCI6MTcwMjU3MzQ5M30.zzu3jlVw0gtzJpfAsjm0jpcbdKuM9oYhYYzGq7eYLa79V2flLeaOAhxrvwU7jNbofwYVs8B-oUvhMhLVfRHZIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/producto/c0a80187-8c69-111d-818c-691123c20002",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"c0a80187-8c69-111d-818c-691123c20002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria a Produto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTE4ZjctODE4Yy02OTI5MGI1NTAwMDUiLCJpYXQiOjE3MDI1NzEzNTAsImV4cCI6MTcwMjU3NDk1MH0.ui6XgEoyv0sjZFKBrrxJMcDPAdYEvLufQORBUsinB_X9A2MyZm2ftTDem6TBGGB6Jz7fVjgYpzfdJqCBBHSn_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/producto/c0a80187-8c69-18f7-818c-6928ffef0003/addCategoria/c0a80187-8c69-18f7-818c-692b636b0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"c0a80187-8c69-18f7-818c-6928ffef0003",
+								"addCategoria",
+								"c0a80187-8c69-18f7-818c-692b636b0006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria a Produto Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTE4ZjctODE4Yy02OTI5MGI1NTAwMDUiLCJpYXQiOjE3MDI1NzEzNTAsImV4cCI6MTcwMjU3NDk1MH0.ui6XgEoyv0sjZFKBrrxJMcDPAdYEvLufQORBUsinB_X9A2MyZm2ftTDem6TBGGB6Jz7fVjgYpzfdJqCBBHSn_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/producto/c0a80187-8c69-18f7-818c-6928ffef0003/deleteCategoria/c0a80187-8c69-18f7-818c-692b636b0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"producto",
+								"c0a80187-8c69-18f7-818c-6928ffef0003",
+								"deleteCategoria",
+								"c0a80187-8c69-18f7-818c-692b636b0006"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORIAS",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzZhLTE5NTEtODE4Yy02YTY5YTJkNzAwMDUiLCJpYXQiOjE3MDI1OTIzNTksImV4cCI6MTcwMjU5NTk1OX0.zxM0r6JfoCpx3IRNfUV7YQrG2NAE99uRytHpV5td49jxgvXhbYKnYPnNGqv-h4n-glrdgGzZXq9tKnEcrJrp9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categoria/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categoria/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categoria",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTE4ZjctODE4Yy02OTI5MGI1NTAwMDUiLCJpYXQiOjE3MDI1NzEzNTAsImV4cCI6MTcwMjU3NDk1MH0.ui6XgEoyv0sjZFKBrrxJMcDPAdYEvLufQORBUsinB_X9A2MyZm2ftTDem6TBGGB6Jz7fVjgYpzfdJqCBBHSn_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Carnesias\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categoria/c0a80187-8c69-18f7-818c-692b636b0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categoria",
+								"c0a80187-8c69-18f7-818c-692b636b0006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTE1YTAtODE4Yy02OTM1Yzc2YTAwMDUiLCJpYXQiOjE3MDI1NzIxODQsImV4cCI6MTcwMjU3NTc4NH0.BTlZJf8DXoqMzFrwCl-eHHiD-53aRZwcxp2lr9dk2tEfEnYMd92dI9W4RAHrpx3vjDM_MYoi8YmT4y9BjKbgZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categoria/c0a80187-8c69-18f7-818c-692b636b0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categoria",
+								"c0a80187-8c69-18f7-818c-692b636b0006"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DIRECCIÓN ENVÍO",
+			"item": [
+				{
+					"name": "NEW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzY5LTFhNWMtODE4Yy02OTVhYzhkZTAwMDUiLCJpYXQiOjE3MDI1NzQ2MDksImV4cCI6MTcwMjU3ODIwOX0.NgCG7dLmDz4fZlDHvvMbG2SMyXKOxR73I60Qr0XiMF6XDYubnL86y-2vOL_zJaGocV_RTBbjlla_3hsdZBLC9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"calle\" : \"asdad\",\r\n    \"numero\" : \"aaa\",\r\n    \"piso\" : \"12\",\r\n    \"puerta\" : \"lamia\",\r\n    \"poblacion\" : \"latuya\",\r\n    \"ciudad\" : \"sevilla\",\r\n    \"cp\" : \"41231\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/direccionEnvio/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"direccionEnvio",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALL",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzZhLTE5NTEtODE4Yy02YTY5YTJkNzAwMDUiLCJpYXQiOjE3MDI1OTIzNTksImV4cCI6MTcwMjU5NTk1OX0.zxM0r6JfoCpx3IRNfUV7YQrG2NAE99uRytHpV5td49jxgvXhbYKnYPnNGqv-h4n-glrdgGzZXq9tKnEcrJrp9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"calle\" : \"Callesita\",\r\n    \"numero\" : \"aaa\",\r\n    \"piso\" : \"12\",\r\n    \"puerta\" : \"lamia\",\r\n    \"poblacion\" : \"latuya\",\r\n    \"ciudad\" : \"sevilla\",\r\n    \"cp\" : \"41231\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/direccionEnvio/edit/c0a80187-8c6a-1951-818c-6a69f10a0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"direccionEnvio",
+								"edit",
+								"c0a80187-8c6a-1951-818c-6a69f10a0006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDE4Ny04YzZhLTE5NTEtODE4Yy02YTY5YTJkNzAwMDUiLCJpYXQiOjE3MDI1OTIzNTksImV4cCI6MTcwMjU5NTk1OX0.zxM0r6JfoCpx3IRNfUV7YQrG2NAE99uRytHpV5td49jxgvXhbYKnYPnNGqv-h4n-glrdgGzZXq9tKnEcrJrp9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/direccionEnvio/c0a80187-8c6a-1951-818c-6a69f10a0006",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"direccionEnvio",
+								"c0a80187-8c6a-1951-818c-6a69f10a0006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
