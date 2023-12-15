@@ -33,6 +33,8 @@ public class Menu {
 
     private String nombre;
 
+    private Double precio;
+
     @ManyToMany(mappedBy = "menus", fetch = FetchType.EAGER)
     @Builder.Default
     private List<Producto> productos = new ArrayList<>();
